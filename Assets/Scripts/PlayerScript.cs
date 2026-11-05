@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody rb;
     private int count;
     public TextMeshProUGUI countText;
+    public GameObject winTextObject;
     private float movementX;
     private float movementY;
     public float speed;
@@ -14,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        winTextObject.SetActive(false);
         count = 0;
         SetCountText();
     }
@@ -25,6 +27,10 @@ Vector2 movementVector = movementValue.Get<Vector2>();
     void SetCountText()
     {
         countText.text = "Count: "+ count.ToString();
+        if (count == 8)
+        {
+            winTextObject.SetActive(true);
+        }
     }
     void FixedUpdate(){
         Vector3 movement = new Vector3 (movementX, 0.0f, movementY);
